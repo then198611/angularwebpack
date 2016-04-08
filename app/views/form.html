@@ -1,0 +1,18 @@
+<form name="myForm" novalidate >
+    <p>用户名:
+        <input type="text" name="user" ng-model="user" required  class="form-control" ng-blur="form.showError('user')" ng-focus="form.hideError('user')"/>
+        <span ng-show="form.err.user">
+            <span style="color:red" ng-show="myForm.user.$error.required">用户名是必须的</span>
+        </span>
+    </p>
+    <p>邮箱:
+        <input type="email" name="email" ng-model="email" required class="form-control" ng-blur="form.showError('email')" ng-focus="form.hideError('email')"/>
+        <span style="color:red;" ng-show="form.err.email">
+            <span ng-show="myForm.email.$error.required">邮箱是必须的</span>
+            <span ng-show="myForm.email.$invalid && myForm.email.$error.email">非法的邮箱</span>
+        </span>
+    </p>
+    <p>
+        <input type="submit" ng-disabled="myForm.user.$invalid || myForm.email.$invalid" class="btn btn-primary" value="注册" ng-click="form.register()"/>
+    </p>
+</form>

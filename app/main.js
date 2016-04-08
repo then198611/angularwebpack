@@ -1,3 +1,5 @@
+import './styles/index.less';
+
 import angular from 'angular';
 import ngRoute from 'angular-route';
 import routerConfig from './route';
@@ -10,3 +12,4 @@ angular
     .service('randomText',services.RandomText)
     .controller('AboutController',controllers.AboutController)
     .controller('UserController',controllers.UserController)
+    .controller('FormController',controllers.FormController)

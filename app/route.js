@@ -12,6 +12,11 @@ export default function routers($routeProvider,$locationProvider) {
             controller : 'UserController',
             controllerAs : 'user'
         })
+        .when('/form',{
+            templateUrl : './views/form.html',
+            controller : 'FormController',
+            controllerAs : 'form'
+        })
         .otherwise({
             redirectTo : '/'
         });

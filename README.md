@@ -2,7 +2,8 @@ angular webpack build
 
 need : nodejs env
 
-npm install -g webpack 
+npm install -g webpack
+npm install
 
 
 develop:

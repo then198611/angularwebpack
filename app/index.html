@@ -7,7 +7,7 @@
     <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <script src="//cdn.bootcss.com/angular.js/1.5.0/angular.min.js"></script>
 </head>
-<body ng-app="app">
+<body>
 
 <div ng-app="app" class="container">
     <div class="header">header</div>
@@ -17,6 +17,18 @@
         <a href="#/form">form</a>
     </nav>
     <ng-view></ng-view>
+
+    <test-directive title="Links">
+        <ul>
+            <li>link1</li>
+            <li>link2</li>
+        </ul>
+    </test-directive>
+    <test-directive title="Tag">
+        <div class="tags">
+            <a>a</a><a>b</a><a>c</a>
+        </div>
+    </test-directive>
     <div class="footer">footer</div>
 </div>
 </body>

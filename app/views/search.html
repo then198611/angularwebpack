@@ -1,0 +1,2 @@
+<input type="text" ng-model="per" />
+<p ng-repeat="person in search.people | orderBy: 'name' |filter: per">{{person.name}}</p>

@@ -1,5 +1,6 @@
-import RandomText from './random_text';
+import angular from 'angular';
+import randomText from './random_text';
 
-export default {
-    RandomText : RandomText
-}
+
+export default angular.module('app.service',[])
+    .service('randomText',randomText)

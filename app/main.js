@@ -3,27 +3,35 @@ import './styles/index.less';
 import angular from 'angular';
 import ngRoute from 'angular-route';
 import routerConfig from './route';
-import controllers from './controllers/index';
-import services from './services/index';
-import directives from './directives/index';
 
-//controllers
-angular.module('app.controller',[])
-    .controller('AboutController',controllers.AboutController)
-    .controller('UserController',controllers.UserController)
-    .controller('FormController',controllers.FormController)
+//controller entry
+import './controllers/index';
+//service entry
+import './services/index';
+//directive entry
+import './directives/index';
 
-
-//services
-angular.module('app.service',[])
-    .service('randomText',services.RandomText)
-
-//directives
-angular.module('app.directive',[])
-    .directive('testDirective',directives.testDirective)
-
+//promise
+function getData($timeout,$q){
+    return ()=>{
+        return $q((resolve,reject)=>{
+            $timeout(()=>{
+                resolve(Math.floor(Math.random() * 10))
+            },2000)
+        })
+    }
+}
 //app
 angular
-    .module('app', [ngRoute,'app.controller','app.service','app.directive'])
+    .module('app', ['app.controller','app.service','app.directive',ngRoute])
     .config(routerConfig)
+    .factory('getData',getData)
+    .run(function(getData){
+        var promise = getData();
+        promise.then(function(string){
+            console.log(string)
+        },function(error){
+            console.error(error)
+        })
+    })
 

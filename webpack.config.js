@@ -27,10 +27,10 @@ var basePlugins = [
             collapseWhitespace: true
         } : null
     }),
-    new CopyWebpackPlugin([{
-        from : path.join('app','views'),
-        to : path.join(__dirname,'views')
-    }])
+    //new CopyWebpackPlugin([{
+    //    from : path.join('app','views'),
+    //    to : path.join(__dirname,'views')
+    //}])
 ];
 var buildPlugins = [
     new CleanWebpackPlugin('dist/'),
@@ -66,10 +66,10 @@ module.exports = {
                 exclude : /node_modules/,
                 loaders: ['babel?presets[]=es2015']
             },
-            {
-                test : /\.html$/,
-                loader : 'raw'
-            },
+            //{
+            //    test : /\views\/*.html$/,
+            //    loader : 'file?name=views/[name].html'
+            //},
             {
                 test: /\.(png|jpeg|gif|jpg)$/,
                 loader: 'url?limit=8192&name=images/[name].[hash].[ext]'

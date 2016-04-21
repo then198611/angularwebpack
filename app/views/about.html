@@ -1,6 +1,10 @@
 <h2>about</h2>
-
-<button class="btn btn-primary btn-sm" ng-click="about.changeText()">切换文字</button>
-<button class="btn btn-primary btn-sm" ng-click="about.restoreText()">还原</button>
-<button class="btn btn-primary btn-sm" ng-click="about.randomText()">随机</button>
+<img ng-src='{{about.bannerImg}}' width="100%"/>
+<md-button class="md-raised" ng-click="about.changeText()">切换</md-button>
+<md-button class="md-raised" ng-click="about.restoreText()">还原</md-button>
+<md-button class="md-raised" ng-click="about.randomText()">随即</md-button>
 <p>{{ about.aboutText}}</p>
+
+<md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+
+<md-progress-circular md-mode="indeterminate"></md-progress-circular>

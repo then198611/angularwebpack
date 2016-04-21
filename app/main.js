@@ -1,7 +1,7 @@
 import './styles/index.less';
-
 import angular from 'angular';
-import ngRoute from 'angular-route';
+import 'angular-ui-router';
+import 'angular-material';
 import routerConfig from './route';
 
 //controller entry
@@ -23,7 +23,7 @@ function getData($timeout,$q){
 }
 //app
 angular
-    .module('app', ['app.controller','app.service','app.directive',ngRoute])
+    .module('app', ['app.controller','app.service','app.directive','ui.router','ngMaterial'])
     .config(routerConfig)
     .factory('getData',getData)
     .run(function(getData){

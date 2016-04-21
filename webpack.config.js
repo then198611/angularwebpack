@@ -67,8 +67,9 @@ module.exports = {
                 loaders: ['babel?presets[]=es2015']
             },
             //{
-            //    test : /\views\/*.html$/,
-            //    loader : 'file?name=views/[name].html'
+            //    test : /\.html$/,
+            //    exclude : /node_modules/,
+            //    loader : 'raw'
             //},
             {
                 test: /\.(png|jpeg|gif|jpg)$/,

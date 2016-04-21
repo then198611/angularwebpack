@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <base href="/">
-    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <script src="//cdn.bootcss.com/angular.js/1.5.0/angular.min.js"></script>
+    <link href="//cdn.bootcss.com/angular-material/1.0.6/angular-material.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -13,12 +12,12 @@
     <div class="header">header</div>
 
     <nav>
-        <a href="#/about">about</a>
-        <a href="#/user">user</a>
-        <a href="#/form">form</a>
-        <a href="#/search">search</a>
+        <a href="/about">about</a>
+        <a href="/user">user</a>
+        <a href="/form">form</a>
+        <a href="/search">search</a>
     </nav>
-    <ng-view></ng-view>
+    <ui-view></ui-view>
 
     <test-directive title="Links">
         <ul>
@@ -33,5 +32,7 @@
     </test-directive>
     <div class="footer">footer</div>
 </div>
+<script src="//cdn.bootcss.com/angular.js/1.5.0/angular.min.js"></script>
+
 </body>
 </html>

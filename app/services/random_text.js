@@ -1,4 +1,5 @@
-class RandomText {
+
+export default class RandomText {
     constructor(){
         this.texts = ['about aaaaaa','about bbbbbbb','about ccccccc','about dddddd','about eeeeeee','about ffffff'];
     }
@@ -9,5 +10,3 @@ class RandomText {
         return this.texts[rand];
     }
 }
-
-export default RandomText

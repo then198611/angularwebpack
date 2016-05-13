@@ -12,7 +12,7 @@ console.log(process.env.NODE_ENV);
 var entry = './app/main.js';
 
 var basePlugins = [
-    new ExtractTextPlugin("styles/[name].[chunkhash].css",{
+    new ExtractTextPlugin("styles/[name].[chunkhash].css", {
         allChunks: true
     }),
     new HTMLWebpackPlugin({
@@ -26,7 +26,7 @@ var basePlugins = [
             removeComments: true,
             collapseWhitespace: true
         } : null
-    }),
+    })
     //new CopyWebpackPlugin([{
     //    from : path.join('app','views'),
     //    to : path.join(__dirname,'views')
@@ -34,8 +34,12 @@ var basePlugins = [
 ];
 var buildPlugins = [
     new CleanWebpackPlugin('dist/'),
-    //new webpack.optimize.CommonsChunkPlugin('common', 'common.js')
-
+    new webpack.optimize.CommonsChunkPlugin('vender', 'scripts/vender.js'),
+    new webpack.optimize.UglifyJsPlugin({
+        compress: {
+            warnings: false
+        }
+    })
 ];
 var devPlugins = [
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -43,16 +47,19 @@ var devPlugins = [
     new webpack.NoErrorsPlugin()
 ];
 module.exports = {
-    debug : !isProduction,
-    devtool : !isProduction ? "source-map" : null,
-    entry : entry,
-    output : {
-        path : path.join(__dirname,'dist'),
-        filename : 'scripts/[name].[hash].js',
-        chunkFilename : '[id].chunk.js',
-        publicPath : !isProduction ? '' : '//cnd.test.com/dist'
+    debug: !isProduction,
+    devtool: !isProduction ? "source-map" : null,
+    entry: {
+        main: entry,
+        vender: ['jquery', 'angular', 'angular-ui-router', 'angular-cookies']
     },
-    module : {
+    output: {
+        path: path.join(__dirname, 'dist'),
+        filename: 'scripts/[name].[hash].js',
+        chunkFilename: '[id].chunk.js',
+        publicPath: !isProduction ? '/' : '//crm.dev.tigerwit.com/v2/'
+    },
+    module: {
         //preLoaders: [
         //    {
         //        test: /\.(js|jsx)$/,
@@ -60,10 +67,9 @@ module.exports = {
         //        exclude: /node_modules/
         //    }
         //],
-        loaders : [
-            {
-                test : /\.js$/,
-                exclude : /node_modules/,
+        loaders: [{
+                test: /\.js$/,
+                exclude: /node_modules/,
                 loaders: ['babel?presets[]=es2015']
             },
             //{
@@ -74,27 +80,28 @@ module.exports = {
             {
                 test: /\.(png|jpeg|gif|jpg)$/,
                 loader: 'url?limit=8192&name=images/[name].[hash].[ext]'
-            },
-            {
-                test: /\.(woff|woff2|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: 'file-loader?name=fonts/[name].[hash].[ext]'
-            },
-            {
-                test : /\.css/,
-                loader : ExtractTextPlugin.extract("style",!isProduction ? "css?sourceMap!postcss?sourceMap!less?sourceMap" : 'css!postcss!less')
-            },
-            {
-                test : /\.less$/,
-                loader : ExtractTextPlugin.extract("style",!isProduction ? "css?sourceMap!postcss?sourceMap!less?sourceMap" : 'css!postcss!less')
+            }, {
+                test: /\.(woff|woff2|ttf|eot|svg)$/,
+                loader: 'file?name=fonts/[name].[hash].[ext]'
+            }, {
+                test: /\.css/,
+                loader: ExtractTextPlugin.extract("style", !isProduction ?
+                    "css?sourceMap!postcss?sourceMap!less?sourceMap" : 'css!postcss!less')
+            }, {
+                test: /\.less$/,
+                loader: ExtractTextPlugin.extract("style", !isProduction ?
+                    "css?sourceMap!postcss?sourceMap!less?sourceMap" : 'css!postcss!less')
             }
         ]
     },
-    plugins : isProduction ? buildPlugins.concat(basePlugins) : devPlugins.concat(basePlugins),
-    postcss : [autoprefixer({browsers: ['> 1%', 'last 2 versions']})],
-    externals: {//不被打包的项目
-        "angular": "angular"
-    }
-    //eslint: {
-    //    configFile: '.eslintrc'
-    //}
+    plugins: isProduction ? buildPlugins.concat(basePlugins) : devPlugins.concat(basePlugins),
+    postcss: [autoprefixer({
+            browsers: ['> 1%', 'last 2 versions']
+        })]
+        //externals: {//不被打包的项目
+        //    "angular": "angular"
+        //}
+        //eslint: {
+        //    configFile: '.eslintrc'
+        //}
 };
